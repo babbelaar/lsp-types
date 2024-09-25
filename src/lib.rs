@@ -528,11 +528,14 @@ pub struct TextEdit {
     /// The string to be inserted. For delete operations use an
     /// empty string.
     pub new_text: String,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub insert_text_format: Option<InsertTextFormat>,
 }
 
 impl TextEdit {
     pub fn new(range: Range, new_text: String) -> TextEdit {
-        TextEdit { range, new_text }
+        TextEdit { range, new_text, insert_text_format: None }
     }
 }
 
